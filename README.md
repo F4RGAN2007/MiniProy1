@@ -2,4 +2,4 @@
 
 Santiago Avalo Monsalve
 Edward Stivens Pinto
-Daniel Cano
+<h1> Daniel GómezCano
