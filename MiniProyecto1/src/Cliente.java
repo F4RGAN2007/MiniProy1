@@ -1,3 +1,6 @@
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 public class Cliente {
     private String cedula;
     private String nombre;
@@ -32,8 +35,11 @@ public class Cliente {
     public String getFecha() {
         return fecha;
     }
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setFecha() {
+        Date fechaSistema = new Date();
+        SimpleDateFormat DMY = new SimpleDateFormat("dd-MM-yyyy");
+
+        this.fecha = DMY.format(fechaSistema) ;
     }
 
     
