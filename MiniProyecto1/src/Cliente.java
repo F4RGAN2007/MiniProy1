@@ -36,9 +36,11 @@ public class Cliente {
         return fecha;
     }
     public void setFecha() {
+        /*Usa la libreria Date para obtener la fecha actual */
         Date fechaSistema = new Date();
+        /*Usa SimpleDateFormat para determinar el format en String */
         SimpleDateFormat DMY = new SimpleDateFormat("dd-MM-yyyy");
-
+        /*Transforma la variable de tipo DAte a String */
         this.fecha = DMY.format(fechaSistema) ;
     }
 
