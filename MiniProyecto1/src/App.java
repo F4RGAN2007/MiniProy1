@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class App {
     static ArrayList <Cliente> lista_clientes = new ArrayList<Cliente>();
@@ -20,18 +22,23 @@ public class App {
     public static void create_client(){
         Scanner data = new Scanner(System.in);
         Cliente cliente = new Cliente(null, null, 0, null);
+        
         System.out.println("Bienvenido nuevo cliente\nIngrese sus datos:");
         System.out.println("Nombre:");
         cliente.setNombre(data.next());
+        
         System.out.println("Cedula:");
         cliente.setCedula(data.next());
+        
         System.out.println("Ingresos iniciales:");
         cliente.setIngresos(data.nextLong());
+       
         System.out.println("Fecha de creacion");
-        /*EDITAR LUEGO SI ES NECCESARIO
-         * Hacer automatico la fecha de creacion con alguna libreria
-         */
-        cliente.setFecha(data.next());
+        /*EDITAR LUEGO SI ES NECCESARIO*/
+       
+        cliente.setFecha();
+        System.out.println(cliente.getFecha());
+       
         lista_clientes.add(cliente);
     }
 
