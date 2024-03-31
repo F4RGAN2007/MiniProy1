@@ -1,5 +1,6 @@
 # Mini Proyecto 1
 
-Santiago Avalo Monsalve
-Edward Stivens Pinto
-<h1> Daniel GómezCano
+**Integrantes:**
+<br>Santiago Avalo Monsalve
+<br>Edward Stivens Pinto
+<br>Daniel GómezCano
