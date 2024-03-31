@@ -7,6 +7,27 @@ public class App {
     static ArrayList <Cliente> lista_clientes = new ArrayList<Cliente>();
     
 
+//metodo para buscar clientes por cedula
+    public static void search_cliente() {
+        System.out.println("Buscar un cliente");
+        System.out.println("Ingrese el numero de cedula del cliente para ver su ahorro: ");
+        Scanner data = new Scanner(System.in);
+        String cedula_buscar = data.next();
+
+        boolean clientnotfound = true;//se determina que el cliente no existe por defecto
+        for(Cliente clientebuscar : lista_clientes){
+            if(cedula_buscar.equals(clientebuscar.getCedula())){
+                System.out.println("El cliente " + clientebuscar.getNombre() + " tiene un ahorro de " + clientebuscar.getIngresos());
+                clientnotfound = false;//cuando lo encuentra cambia su valor
+                break;
+            }
+        }
+        if(clientnotfound){
+            System.out.println("Cliente no encontrado");
+        }
+    }
+
+
     public static void list_clients(){
         System.out.println("Lista de clientes");
 
@@ -27,8 +48,26 @@ public class App {
         System.out.println("Nombre:");
         cliente.setNombre(data.next());
         
-        System.out.println("Cedula:");
-        cliente.setCedula(data.next());
+         //Condicional/bucle que determina si un cliente ya fue creado con ese numero de cedula
+         Boolean repetido;
+         while(true){
+             repetido = false;
+             System.out.println("Cedula:");
+             String nuevacedula = data.next();//se crea la nueva cedula para comparar
+             for (Cliente cliente2 : lista_clientes){
+                 if (nuevacedula.equals(cliente2.getCedula())){
+                     repetido = true;//se encuentra similitud y mantiene el bucle
+                     break;
+                 }
+         }
+             if(repetido){
+                 System.out.println("Ese numero de cedula ya esta en uso");
+             }else{
+                 cliente.setCedula(nuevacedula);
+                 break;
+             }
+         }
+ 
         
         System.out.println("Ingresos iniciales:");
         cliente.setIngresos(data.nextLong());
@@ -90,13 +129,13 @@ public class App {
     public static void menu(){
         Boolean x = true;
         while(x){
-            System.out.println("Bienvenido al banco HOGAR SIN FAMILIA\n1. Para crear nuevo cliante\n2. Listar clientes\n3. Buscar cliente y ver su ahorro\n4. Ingresar al Submenú de ahorros y prestamos\n5. Salir");
+            System.out.println("Bienvenido al banco HOGAR SIN FAMILIA\n1. Para crear nuevo cliente\n2. Listar clientes\n3. Buscar cliente y ver su ahorro\n4. Ingresar al Submenú de ahorros y prestamos\n5. Salir");
             Scanner scanner = new Scanner(System.in);
             byte opc = scanner.nextByte();
             switch (opc) {
                 case 1: create_client(); break;
                 case 2:  list_clients(); break;
-                case 3:             break;
+                case 3:search_cliente(); break;
                 case 4: submenu(); break;
                 case 5: x = false; break;
                 default:System.out.println("Ingrese un valor valido");break;
