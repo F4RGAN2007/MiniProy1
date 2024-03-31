@@ -52,7 +52,7 @@ public class App {
          Boolean repetido;
          while(true){
              repetido = false;
-             System.out.println("Cedula:");
+             System.out.println("Cédula:");
              String nuevacedula = data.next();//se crea la nueva cedula para comparar
              for (Cliente cliente2 : lista_clientes){
                  if (nuevacedula.equals(cliente2.getCedula())){
@@ -61,7 +61,7 @@ public class App {
                  }
          }
              if(repetido){
-                 System.out.println("Ese numero de cedula ya esta en uso");
+                 System.out.println("Ese número de cédula ya está en uso");
              }else{
                  cliente.setCedula(nuevacedula);
                  break;
@@ -72,7 +72,7 @@ public class App {
         System.out.println("Ingresos iniciales:");
         cliente.setIngresos(data.nextLong());
        
-        System.out.println("Fecha de creacion");
+        System.out.println("Fecha de creación");
         /*EDITAR LUEGO SI ES NECCESARIO*/
        
         cliente.setFecha();
