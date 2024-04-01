@@ -39,7 +39,7 @@ public class App {
     }
 
 
-    //Metodo para crear clientes y guardarlos en una lista de cliantes
+    //Metodo para crear clientes y guardarlos en una lista de clientes
     public static void create_client(){
         Scanner data = new Scanner(System.in);
         Cliente cliente = new Cliente(null, null, 0, null);
@@ -103,7 +103,28 @@ public class App {
 
     //Metodo para pedir CDT
     public static void pedirCDT(){
+        System.out.println("CDT's Digitales banco HOGAR SIN FAMILIA");
+        System.out.println("(1) -> CDT: CON HOGAR PERO SIN FAMILIA (3 MESES)\n(2) -> CDT: CON HOGAR Y CON FAMILIA (6 MESES)");
+        System.out.println("Digita el número del CDT para ver más información");
+        Scanner scanner = new Scanner(System.in);
+        byte opc = scanner.nextByte();
+        switch (opc) {
+            case 1:
+                System.out.println("\nCDT: CON HOGAR PERO SIN FAMILIA\nPLAZO: 3 Meses\nINTERÉS: 3% E.A");
+                System.out.println("SALDO ACTUAL:"); //Falta el método agregarDinero para continuar
+                System.out.println("SALDO DESPUÉS DEL CDT -> "); //Falta el método agregarDinero para continuar
+                System.out.println("¿Deseas este producto? Contacta a un asesor: 602 227 777\n\n");
+                break;
+            case 2:
+                System.out.println("\nCDT: CON HOGAR Y CON FAMILIA\nPLAZO: 6 Meses\nINTERÉS: 5% E.A");
+                System.out.println("SALDO ACTUAL:"); //Falta el método agregarDinero para continuar
+                System.out.println("SALDO DESPUÉS DEL CDT -> "); //Falta el método agregarDinero para continuar
+                System.out.println("¿Deseas este producto? Contacta a un asesor: 602 227 777\n\n");
+                break;
 
+            default: System.out.println("Digita una opción válida");
+                break;
+        }
     }
 
     //Metodo submenú encargado de las operaciones con el dinero
@@ -120,7 +141,7 @@ public class App {
                 case 4: prestamo(); break;
                 case 5: pedirCDT(); break;
                 case 6: x = false;  break;
-                default:System.out.println("Ingrese un valor valido");break;
+                default:System.out.println("Ingrese un valor válido");break;
             }
         }
     }
@@ -134,11 +155,11 @@ public class App {
             byte opc = scanner.nextByte();
             switch (opc) {
                 case 1: create_client(); break;
-                case 2:  list_clients(); break;
-                case 3:search_cliente(); break;
+                case 2: list_clients(); break;
+                case 3: search_cliente(); break;
                 case 4: submenu(); break;
                 case 5: x = false; break;
-                default:System.out.println("Ingrese un valor valido");break;
+                default:System.out.println("Ingrese un valor válido");break;
             }
         }
     }
