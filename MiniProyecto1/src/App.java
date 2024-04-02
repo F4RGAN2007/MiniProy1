@@ -6,11 +6,30 @@ import java.text.SimpleDateFormat;
 public class App {
     static ArrayList <Cliente> lista_clientes = new ArrayList<Cliente>();
     
+    public static void delete_client() {
+        System.out.println("Eliminar un cliente");
+        System.out.println("Ingrese el número de cédula del cliente para eliminar: ");
+        Scanner data = new Scanner(System.in);
+        String cedula_buscar = data.next();
+
+        boolean clientnotfound = true;//se determina que el cliente no existe por defecto
+        for(Cliente clientebuscar : lista_clientes){
+            if(cedula_buscar.equals(clientebuscar.getCedula())){
+                lista_clientes.remove(clientebuscar);
+                System.out.println("Cliente eliminado con éxito");
+                clientnotfound = false;//cuando lo encuentra cambia su valor
+                break;
+            }
+        }
+        if(clientnotfound){
+            System.out.println("Cliente no encontrado");
+        }
+    }
 
 //metodo para buscar clientes por cedula
     public static void search_cliente() {
         System.out.println("Buscar un cliente");
-        System.out.println("Ingrese el numero de cedula del cliente para ver su ahorro: ");
+        System.out.println("Ingrese el número de cédula del cliente para ver su ahorro: ");
         Scanner data = new Scanner(System.in);
         String cedula_buscar = data.next();
 
@@ -73,7 +92,6 @@ public class App {
         cliente.setIngresos(data.nextLong());
        
         System.out.println("Fecha de creación");
-        /*EDITAR LUEGO SI ES NECCESARIO*/
        
         cliente.setFecha();
         System.out.println(cliente.getFecha());
@@ -129,15 +147,16 @@ public class App {
     public static void menu(){
         Boolean x = true;
         while(x){
-            System.out.println("Bienvenido al banco HOGAR SIN FAMILIA\n1. Para crear nuevo cliente\n2. Listar clientes\n3. Buscar cliente y ver su ahorro\n4. Ingresar al Submenú de ahorros y prestamos\n5. Salir");
+            System.out.println("Bienvenido al banco HOGAR SIN FAMILIA\n1. Para crear nuevo cliente\n2. Listar clientes\n3. Buscar cliente y ver su ahorro\n4. Ingresar al Submenú de ahorros y prestamos\n5. Eliminar cliente del banco\n6. Salir");
             Scanner scanner = new Scanner(System.in);
             byte opc = scanner.nextByte();
             switch (opc) {
                 case 1: create_client(); break;
                 case 2:  list_clients(); break;
                 case 3:search_cliente(); break;
-                case 4: submenu(); break;
-                case 5: x = false; break;
+                case 4:       submenu(); break;
+                case 5: delete_client(); break;
+                case 6: x = false; break;
                 default:System.out.println("Ingrese un valor valido");break;
             }
         }
@@ -147,7 +166,5 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         menu();
-    
-    
     }
 }
