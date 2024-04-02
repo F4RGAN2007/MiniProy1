@@ -62,15 +62,15 @@ public class App {
         Scanner data = new Scanner(System.in);
         Cliente cliente = new Cliente(null, null,0 ,0, null);
         
-        System.out.println("Bienvenido nuevo cliente\nIngrese sus datos:");
-        System.out.println("Nombre:");
+        System.out.println("Bienvenido nuevo cliente\nIngrese sus datos: ");
+        System.out.println("Nombre: ");
         cliente.setNombre(data.next());
         
          //Condicional/bucle que determina si un cliente ya fue creado con ese numero de cedula
          Boolean repetido;
          while(true){
              repetido = false;
-             System.out.println("Cédula:");
+             System.out.println("Cédula: ");
              String nuevacedula = data.next();//se crea la nueva cedula para comparar
              for (Cliente cliente2 : lista_clientes){
                  if (nuevacedula.equals(cliente2.getCedula())){
@@ -89,13 +89,13 @@ public class App {
         System.out.println("Nivel de ingresos (mensual): ");
         cliente.setIngresos(data.nextInt());
        
-        System.out.println("Fecha de creación");
+        System.out.println("Fecha de creación: ");
        
         cliente.setFecha();
         System.out.println(cliente.getFecha());
        
         lista_clientes.add(cliente);
-        System.out.println("Cliente creado con Éxito! Ingrese sus ahorros en el submenú");
+        System.out.println("Cliente creado con ¡Éxito! Ingrese sus ahorros en el submenú");
     }
 
     //Metodo para agregar dinero ahorrado
@@ -116,7 +116,7 @@ public class App {
             }
         }
         if (!clienteEncontrado){
-            System.out.println("El cliente no existe :()");
+            System.out.println("El cliente no existe :(");
         }
     }
 
@@ -135,14 +135,14 @@ public class App {
                     cliente.setAhorro(cliente.getAhorro() - monto);
                     System.out.println("Monto retirado exitosamente.\n Nuevo saldo: "+cliente.getAhorro());
                 } else {
-                    System.out.println("El dinero que quiere retirar excede su saldo hermano");
+                    System.out.println("El dinero que quiere retirar excede su saldo hermano, intente de nuevo");
                 }
                 clienteEncontrado = true;
                 break;
             }
         }
         if (!clienteEncontrado){
-            System.out.println("El cliente no existe :()");
+            System.out.println("El cliente no existe :(");
         }
     }
 
@@ -164,7 +164,7 @@ public class App {
             }
         }
         if (!clienteEncontrado) {
-            System.out.println("El cliente no existe :()");
+            System.out.println("El cliente no existe :(");
         }
     }
 
