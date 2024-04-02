@@ -8,7 +8,7 @@ public class App {
     
     public static void delete_client() {
         System.out.println("Eliminar un cliente");
-        System.out.println("Ingrese el numero de cedula del cliente para eliminar: ");
+        System.out.println("Ingrese el número de cédula del cliente para eliminar: ");
         Scanner data = new Scanner(System.in);
         String cedula_buscar = data.next();
 
@@ -16,6 +16,7 @@ public class App {
         for(Cliente clientebuscar : lista_clientes){
             if(cedula_buscar.equals(clientebuscar.getCedula())){
                 lista_clientes.remove(clientebuscar);
+                System.out.println("Cliente eliminado con éxito");
                 clientnotfound = false;//cuando lo encuentra cambia su valor
                 break;
             }
@@ -28,7 +29,7 @@ public class App {
 //metodo para buscar clientes por cedula
     public static void search_cliente() {
         System.out.println("Buscar un cliente");
-        System.out.println("Ingrese el numero de cedula del cliente para ver su ahorro: ");
+        System.out.println("Ingrese el número de cédula del cliente para ver su ahorro: ");
         Scanner data = new Scanner(System.in);
         String cedula_buscar = data.next();
 
@@ -146,7 +147,7 @@ public class App {
     public static void menu(){
         Boolean x = true;
         while(x){
-            System.out.println("Bienvenido al banco HOGAR SIN FAMILIA\n1. Para crear nuevo cliente\n2. Listar clientes\n3. Buscar cliente y ver su ahorro\n4. Ingresar al Submenú de ahorros y prestamos\n5. Salir");
+            System.out.println("Bienvenido al banco HOGAR SIN FAMILIA\n1. Para crear nuevo cliente\n2. Listar clientes\n3. Buscar cliente y ver su ahorro\n4. Ingresar al Submenú de ahorros y prestamos\n5. Eliminar cliente del banco\n6. Salir");
             Scanner scanner = new Scanner(System.in);
             byte opc = scanner.nextByte();
             switch (opc) {
