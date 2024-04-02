@@ -4,12 +4,14 @@ import java.text.SimpleDateFormat;
 public class Cliente {
     private String cedula;
     private String nombre;
-    private long ingresos;
+    private long ahorro;
+    private int ingresos;
     private String fecha;
     
-    public Cliente(String cedula, String nombre, long ingresos, String fecha) {
+    public Cliente(String cedula, String nombre, long ahorro ,int ingresos, String fecha) {
         this.cedula = cedula;
         this.nombre = nombre;
+        this.ahorro = ahorro;
         this.ingresos = ingresos;
         this.fecha = fecha;
     }
@@ -26,10 +28,16 @@ public class Cliente {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    public long getAhorro() {
+        return ahorro;
+    }
+    public void setAhorro(long ahorro) {
+        this.ahorro = ahorro;
+    }
     public long getIngresos() {
         return ingresos;
     }
-    public void setIngresos(long ingresos) {
+    public void setIngresos(int ingresos) {
         this.ingresos = ingresos;
     }
     public String getFecha() {
@@ -43,9 +51,4 @@ public class Cliente {
         /*Transforma la variable de tipo DAte a String */
         this.fecha = DMY.format(fechaSistema) ;
     }
-
-    
-
-
-
 }

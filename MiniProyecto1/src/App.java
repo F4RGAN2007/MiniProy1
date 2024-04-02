@@ -36,7 +36,7 @@ public class App {
         boolean clientnotfound = true;//se determina que el cliente no existe por defecto
         for(Cliente clientebuscar : lista_clientes){
             if(cedula_buscar.equals(clientebuscar.getCedula())){
-                System.out.println("El cliente " + clientebuscar.getNombre() + " tiene un ahorro de " + clientebuscar.getIngresos());
+                System.out.println("El cliente " + clientebuscar.getNombre() + " tiene un ahorro de " + clientebuscar.getAhorro());
                 clientnotfound = false;//cuando lo encuentra cambia su valor
                 break;
             }
@@ -57,21 +57,20 @@ public class App {
         }
     }
 
-
-    //Metodo para crear clientes y guardarlos en una lista de cliantes
+    //Metodo para crear clientes y guardarlos en una lista de clientes
     public static void create_client(){
         Scanner data = new Scanner(System.in);
-        Cliente cliente = new Cliente(null, null, 0, null);
+        Cliente cliente = new Cliente(null, null,0 ,0, null);
         
-        System.out.println("Bienvenido nuevo cliente\nIngrese sus datos:");
-        System.out.println("Nombre:");
+        System.out.println("Bienvenido nuevo cliente\nIngrese sus datos: ");
+        System.out.println("Nombre: ");
         cliente.setNombre(data.next());
         
          //Condicional/bucle que determina si un cliente ya fue creado con ese numero de cedula
          Boolean repetido;
          while(true){
              repetido = false;
-             System.out.println("Cédula:");
+             System.out.println("Cédula: ");
              String nuevacedula = data.next();//se crea la nueva cedula para comparar
              for (Cliente cliente2 : lista_clientes){
                  if (nuevacedula.equals(cliente2.getCedula())){
@@ -87,31 +86,86 @@ public class App {
              }
          }
  
-        
-        System.out.println("Ingresos iniciales:");
-        cliente.setIngresos(data.nextLong());
+        System.out.println("Nivel de ingresos (mensual): ");
+        cliente.setIngresos(data.nextInt());
        
-        System.out.println("Fecha de creación");
+        System.out.println("Fecha de creación: ");
        
         cliente.setFecha();
         System.out.println(cliente.getFecha());
        
         lista_clientes.add(cliente);
+        System.out.println("Cliente creado con ¡Éxito! Ingrese sus ahorros en el submenú");
     }
 
     //Metodo para agregar dinero ahorrado
     public static void agregarDinero(){
-
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese la cédula del cliente: ");
+        String cedula = scanner.nextLine();
+        System.out.println("Ingrese el monto a insertar: ");
+        long monto = scanner.nextLong();
+        scanner.nextLine();
+        boolean clienteEncontrado = false;
+        for (Cliente cliente : lista_clientes) {
+            if (cliente.getCedula().equals(cedula)){
+                cliente.setAhorro(monto + cliente.getAhorro());
+                System.out.println("Monto agregado correctamente.\n Nuevo saldo: "+ cliente.getAhorro());
+                clienteEncontrado = true;
+                break;
+            }
+        }
+        if (!clienteEncontrado){
+            System.out.println("El cliente no existe :(");
+        }
     }
 
     //Metodo para quitar dinero ahorrado
     public static void quitarDinero(){
-
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese la cédula del cliente: ");
+        String cedula = scanner.nextLine();
+        System.out.println("Ingrese el monto a retirar: ");
+        long monto = scanner.nextLong();
+        scanner.nextLine();
+        boolean clienteEncontrado = false;
+        for (Cliente cliente : lista_clientes){
+            if (cliente.getCedula().equals(cedula)){
+                if (monto <= cliente.getAhorro()){
+                    cliente.setAhorro(cliente.getAhorro() - monto);
+                    System.out.println("Monto retirado exitosamente.\n Nuevo saldo: "+cliente.getAhorro());
+                } else {
+                    System.out.println("El dinero que quiere retirar excede su saldo hermano, intente de nuevo");
+                }
+                clienteEncontrado = true;
+                break;
+            }
+        }
+        if (!clienteEncontrado){
+            System.out.println("El cliente no existe :(");
+        }
     }
 
     //Metodo para actualizar ahorros
     public static void actualizarAhorros(){
-
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese la cédula del cliente: ");
+        String cedula = scanner.nextLine();
+        System.out.println("Ingrese el nuevo monto: ");
+        long monto = scanner.nextLong();
+        scanner.nextLine();
+        boolean clienteEncontrado = false;
+        for(Cliente cliente : lista_clientes){
+            if(cliente.getCedula().equals(cedula)){
+                cliente.setAhorro(monto);
+                System.out.println("Monto actualizado correctamente :D");
+                clienteEncontrado = true;
+                break;
+            }
+        }
+        if (!clienteEncontrado) {
+            System.out.println("El cliente no existe :(");
+        }
     }
 
     //Metodo para pedir prestamo
@@ -121,7 +175,28 @@ public class App {
 
     //Metodo para pedir CDT
     public static void pedirCDT(){
+        System.out.println("CDT's Digitales banco HOGAR SIN FAMILIA");
+        System.out.println("(1) -> CDT: CON HOGAR PERO SIN FAMILIA (3 MESES)\n(2) -> CDT: CON HOGAR Y CON FAMILIA (6 MESES)");
+        System.out.println("Digita el número del CDT para ver más información");
+        Scanner scanner = new Scanner(System.in);
+        byte opc = scanner.nextByte();
+        switch (opc) {
+            case 1:
+                System.out.println("\nCDT: CON HOGAR PERO SIN FAMILIA\nPLAZO: 3 Meses\nINTERÉS: 3% E.A");
+                System.out.println("SALDO ACTUAL:"); //Falta el método agregarDinero para continuar
+                System.out.println("SALDO DESPUÉS DEL CDT -> "); //Falta el método agregarDinero para continuar
+                System.out.println("¿Deseas este producto? Contacta a un asesor: 602 227 777\n\n");
+                break;
+            case 2:
+                System.out.println("\nCDT: CON HOGAR Y CON FAMILIA\nPLAZO: 6 Meses\nINTERÉS: 5% E.A");
+                System.out.println("SALDO ACTUAL:"); //Falta el método agregarDinero para continuar
+                System.out.println("SALDO DESPUÉS DEL CDT -> "); //Falta el método agregarDinero para continuar
+                System.out.println("¿Deseas este producto? Contacta a un asesor: 602 227 777\n\n");
+                break;
 
+            default: System.out.println("Digita una opción válida");
+                break;
+        }
     }
 
     //Metodo submenú encargado de las operaciones con el dinero
@@ -138,7 +213,7 @@ public class App {
                 case 4: prestamo(); break;
                 case 5: pedirCDT(); break;
                 case 6: x = false;  break;
-                default:System.out.println("Ingrese un valor valido");break;
+                default:System.out.println("Ingrese un valor válido");break;
             }
         }
     }
@@ -161,8 +236,6 @@ public class App {
             }
         }
     }
-
-
 
     public static void main(String[] args) throws Exception {
         menu();
