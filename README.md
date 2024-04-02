@@ -3,4 +3,4 @@
 **Integrantes:**
 <br>Santiago Avalo Monsalve
 <br>Edward Stivens Pinto
-<br>Daniel GómezCano
+<br>Daniel Gómez Cano

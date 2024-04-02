@@ -6,18 +6,37 @@ import java.text.SimpleDateFormat;
 public class App {
     static ArrayList <Cliente> lista_clientes = new ArrayList<Cliente>();
     
-
-//metodo para buscar clientes por cedula
-    public static void search_cliente() {
-        System.out.println("Buscar un cliente");
-        System.out.println("Ingrese el numero de cedula del cliente para ver su ahorro: ");
+    public static void delete_client() {
+        System.out.println("Eliminar un cliente");
+        System.out.println("Ingrese el número de cédula del cliente para eliminar: ");
         Scanner data = new Scanner(System.in);
         String cedula_buscar = data.next();
 
         boolean clientnotfound = true;//se determina que el cliente no existe por defecto
         for(Cliente clientebuscar : lista_clientes){
             if(cedula_buscar.equals(clientebuscar.getCedula())){
-                System.out.println("El cliente " + clientebuscar.getNombre() + " tiene un ahorro de " + clientebuscar.getIngresos());
+                lista_clientes.remove(clientebuscar);
+                System.out.println("Cliente eliminado con éxito");
+                clientnotfound = false;//cuando lo encuentra cambia su valor
+                break;
+            }
+        }
+        if(clientnotfound){
+            System.out.println("Cliente no encontrado");
+        }
+    }
+
+//metodo para buscar clientes por cedula
+    public static void search_cliente() {
+        System.out.println("Buscar un cliente");
+        System.out.println("Ingrese el número de cédula del cliente para ver su ahorro: ");
+        Scanner data = new Scanner(System.in);
+        String cedula_buscar = data.next();
+
+        boolean clientnotfound = true;//se determina que el cliente no existe por defecto
+        for(Cliente clientebuscar : lista_clientes){
+            if(cedula_buscar.equals(clientebuscar.getCedula())){
+                System.out.println("El cliente " + clientebuscar.getNombre() + " tiene un ahorro de " + clientebuscar.getAhorro());
                 clientnotfound = false;//cuando lo encuentra cambia su valor
                 break;
             }
@@ -38,11 +57,10 @@ public class App {
         }
     }
 
-
     //Metodo para crear clientes y guardarlos en una lista de clientes
     public static void create_client(){
         Scanner data = new Scanner(System.in);
-        Cliente cliente = new Cliente(null, null, 0, null);
+        Cliente cliente = new Cliente(null, null,0 ,0, null);
         
         System.out.println("Bienvenido nuevo cliente\nIngrese sus datos:");
         System.out.println("Nombre:");
@@ -68,32 +86,86 @@ public class App {
              }
          }
  
-        
-        System.out.println("Ingresos iniciales:");
-        cliente.setIngresos(data.nextLong());
+        System.out.println("Nivel de ingresos (mensual): ");
+        cliente.setIngresos(data.nextInt());
        
         System.out.println("Fecha de creación");
-        /*EDITAR LUEGO SI ES NECCESARIO*/
        
         cliente.setFecha();
         System.out.println(cliente.getFecha());
        
         lista_clientes.add(cliente);
+        System.out.println("Cliente creado con Éxito! Ingrese sus ahorros en el submenú");
     }
 
     //Metodo para agregar dinero ahorrado
     public static void agregarDinero(){
-
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese la cédula del cliente: ");
+        String cedula = scanner.nextLine();
+        System.out.println("Ingrese el monto a insertar: ");
+        long monto = scanner.nextLong();
+        scanner.nextLine();
+        boolean clienteEncontrado = false;
+        for (Cliente cliente : lista_clientes) {
+            if (cliente.getCedula().equals(cedula)){
+                cliente.setAhorro(monto + cliente.getAhorro());
+                System.out.println("Monto agregado correctamente.\n Nuevo saldo: "+ cliente.getAhorro());
+                clienteEncontrado = true;
+                break;
+            }
+        }
+        if (!clienteEncontrado){
+            System.out.println("El cliente no existe :()");
+        }
     }
 
     //Metodo para quitar dinero ahorrado
     public static void quitarDinero(){
-
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese la cédula del cliente: ");
+        String cedula = scanner.nextLine();
+        System.out.println("Ingrese el monto a retirar: ");
+        long monto = scanner.nextLong();
+        scanner.nextLine();
+        boolean clienteEncontrado = false;
+        for (Cliente cliente : lista_clientes){
+            if (cliente.getCedula().equals(cedula)){
+                if (monto <= cliente.getAhorro()){
+                    cliente.setAhorro(cliente.getAhorro() - monto);
+                    System.out.println("Monto retirado exitosamente.\n Nuevo saldo: "+cliente.getAhorro());
+                } else {
+                    System.out.println("El dinero que quiere retirar excede su saldo hermano");
+                }
+                clienteEncontrado = true;
+                break;
+            }
+        }
+        if (!clienteEncontrado){
+            System.out.println("El cliente no existe :()");
+        }
     }
 
     //Metodo para actualizar ahorros
     public static void actualizarAhorros(){
-
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese la cédula del cliente: ");
+        String cedula = scanner.nextLine();
+        System.out.println("Ingrese el nuevo monto: ");
+        long monto = scanner.nextLong();
+        scanner.nextLine();
+        boolean clienteEncontrado = false;
+        for(Cliente cliente : lista_clientes){
+            if(cliente.getCedula().equals(cedula)){
+                cliente.setAhorro(monto);
+                System.out.println("Monto actualizado correctamente :D");
+                clienteEncontrado = true;
+                break;
+            }
+        }
+        if (!clienteEncontrado) {
+            System.out.println("El cliente no existe :()");
+        }
     }
 
     //Metodo para pedir prestamo
@@ -150,25 +222,22 @@ public class App {
     public static void menu(){
         Boolean x = true;
         while(x){
-            System.out.println("Bienvenido al banco HOGAR SIN FAMILIA\n1. Para crear nuevo cliente\n2. Listar clientes\n3. Buscar cliente y ver su ahorro\n4. Ingresar al Submenú de ahorros y prestamos\n5. Salir");
+            System.out.println("Bienvenido al banco HOGAR SIN FAMILIA\n1. Para crear nuevo cliente\n2. Listar clientes\n3. Buscar cliente y ver su ahorro\n4. Ingresar al Submenú de ahorros y prestamos\n5. Eliminar cliente del banco\n6. Salir");
             Scanner scanner = new Scanner(System.in);
             byte opc = scanner.nextByte();
             switch (opc) {
                 case 1: create_client(); break;
-                case 2: list_clients(); break;
-                case 3: search_cliente(); break;
-                case 4: submenu(); break;
-                case 5: x = false; break;
-                default:System.out.println("Ingrese un valor válido");break;
+                case 2:  list_clients(); break;
+                case 3:search_cliente(); break;
+                case 4:       submenu(); break;
+                case 5: delete_client(); break;
+                case 6: x = false; break;
+                default:System.out.println("Ingrese un valor valido");break;
             }
         }
     }
 
-
-
     public static void main(String[] args) throws Exception {
         menu();
-    
-    
     }
 }
