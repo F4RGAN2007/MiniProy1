@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Date;
-import java.text.SimpleDateFormat;
 
 public class App {
     static ArrayList <Cliente> lista_clientes = new ArrayList<Cliente>();
@@ -169,16 +167,49 @@ public class App {
     }
 
     //Metodo para pedir prestamo
-    public static void prestamo(){
+    public static void pedirPrestamo(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese la cédula del cliente: ");
+        String cedula = scanner.nextLine();
+        boolean clienteEncontrado = false;
+        
 
+        for(Cliente cliente : lista_clientes){
+
+            if(cliente.getCedula().equals(cedula)){
+                System.out.println("Cantidad ahorrada: "+ cliente.getAhorro());
+                System.out.println("Ingrese la cantidad a pedir prestada (como maximo el doble de lo ahorrado)");
+                long prestamo = scanner.nextLong();
+
+                if(cliente.getAhorro()>= prestamo ){
+                    cliente.setAhorro(prestamo + cliente.getAhorro());
+                    System.out.println("Prestamo realizado correctamente.\n Nuevo saldo: "+ cliente.getAhorro());                                        
+                } else 
+                
+                    if((cliente.getAhorro()*2)>= prestamo ){
+                        System.out.println("Debido a que su prestamo excede su ahorro, se pagara en 6 cuotas mensuales con un interes del 2% anual");
+                        double interes = (prestamo*Math.pow((1+0.0017),6))/6;//interes compuesto
+                        double cuota = prestamo/6;//valor de cada cuota
+                        String interes2decimales = String.format("%.2f", interes);
+                        System.out.println("Se realizara el prestamos con cuotas de "+ cuota + " con un interes mensual de "+ interes2decimales+" Durante 6 meses");
+                        cliente.setAhorro(Math.round(cuota) + cliente.getAhorro());
+                        System.out.println("Prestamo realizado correctamente.\n Nuevo saldo: "+ cliente.getAhorro());
+                    } else {System.out.println("Valor maximo del prestamo excedido");}
+                }
+                clienteEncontrado = true;
+                break;
+            }
+            if (!clienteEncontrado) {
+                System.out.println("El cliente no existe");
+            }
     }
-
+    
     //Metodo para pedir CDT
-        public static void pedirCDT(){
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Ingrese la cédula del cliente: ");
-            String cedula = scanner.nextLine();
-            boolean clienteEncontrado = false;
+    public static void pedirCDT(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese la cédula del cliente: ");
+        String cedula = scanner.nextLine();
+        boolean clienteEncontrado = false;
 
         for(Cliente cliente : lista_clientes){
             if(cliente.getCedula().equals(cedula)){
@@ -212,7 +243,7 @@ public class App {
         if (!clienteEncontrado) {
             System.out.println("El cliente no existe :(");
         }
-        }
+    }
 
     //Metodo submenú encargado de las operaciones con el dinero
     public static void submenu(){
@@ -225,7 +256,7 @@ public class App {
                 case 1: agregarDinero(); break;
                 case 2: quitarDinero(); break;
                 case 3: actualizarAhorros(); break;
-                case 4: prestamo(); break;
+                case 4: pedirPrestamo(); break;
                 case 5: pedirCDT(); break;
                 case 6: x = false;  break;
                 default:System.out.println("Ingrese un valor válido");break;
