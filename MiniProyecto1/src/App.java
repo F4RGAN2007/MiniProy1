@@ -46,12 +46,20 @@ public class App {
 
 
     public static void list_clients(){
-        System.out.println("Lista de clientes");
+        System.out.println("-- Lista de clientes --");
 
         //cantidad de clientes en la lista 
         byte x = 1;
         for (Cliente cliente : lista_clientes){
-            System.out.println("Cliente " + x++ + " : " + cliente.getNombre() + " - " + cliente.getCedula());
+            for (int i = 0; i < 30; i++) { //bucle que produce linea como separador estetico
+                System.out.print("-");
+            }
+            System.out.println();
+            System.out.println("Cliente " + x++);
+            System.out.println("Nombre: " + cliente.getNombre());
+            System.out.println("Cédula: " + cliente.getCedula());
+            System.out.println("Ingresos: " + cliente.getIngresos());
+            System.out.println("Fecha de creacion: " + cliente.getFecha());
         }
     }
 
@@ -249,7 +257,14 @@ public class App {
     public static void submenu(){
         Boolean x = true;
         while(x){
-            System.out.println("Submenú ahorros y prestamos HOGAR SIN FAMILIA\n1. Para agregar dinero ahorrado\n2. Para quitar dinero ahorrado\n3. Para actualizar el dinero ahorrado\n4. Para pedir un prestamo \n5. Para pedir CDT \n6. Volver");
+            for (int i = 0; i < 50; i++) { //bucle que produce linea como separador estetico
+                System.out.print("+");
+            }
+            System.out.println("\nSubmenú ahorros y prestamos # HOGAR SIN FAMILIA #");
+            for (int i = 0; i < 50; i++) { //bucle que produce linea como separador estetico
+                System.out.print("+");
+            }
+            System.out.println("\n1. Para agregar dinero ahorrado\n2. Para quitar dinero ahorrado\n3. Para actualizar el dinero ahorrado\n4. Para pedir un prestamo \n5. Para pedir CDT \n6. Volver");
             Scanner scanner = new Scanner(System.in);
             byte opc = scanner.nextByte();
             switch (opc) {
@@ -268,7 +283,14 @@ public class App {
     public static void menu(){
         Boolean x = true;
         while(x){
-            System.out.println("Bienvenido al banco HOGAR SIN FAMILIA\n1. Para crear nuevo cliente\n2. Listar clientes\n3. Buscar cliente y ver su ahorro\n4. Ingresar al Submenú de ahorros y prestamos\n5. Eliminar cliente del banco\n6. Salir");
+            for (int i = 0; i < 45; i++) { //bucle que produce linea de asteriscos como separados estetico
+                System.out.print("*");
+            }
+            System.out.println("\nBienvenido al banco # HOGAR SIN FAMILIA #");
+            for (int i = 0; i < 45; i++) { //bucle que produce linea de asteriscos como separados estetico
+                System.out.print("*");
+            }
+            System.out.println("\n1. Para crear nuevo cliente\n2. Listar clientes\n3. Buscar cliente y ver su ahorro\n4. Ingresar al Submenú de ahorros y prestamos\n5. Eliminar cliente del banco\n6. Salir");
             Scanner scanner = new Scanner(System.in);
             byte opc = scanner.nextByte();
             switch (opc) {
