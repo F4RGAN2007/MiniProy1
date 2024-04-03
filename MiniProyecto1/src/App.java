@@ -103,12 +103,12 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Ingrese la cédula del cliente: ");
         String cedula = scanner.nextLine();
-        System.out.println("Ingrese el monto a insertar: ");
-        long monto = scanner.nextLong();
-        scanner.nextLine();
         boolean clienteEncontrado = false;
         for (Cliente cliente : lista_clientes) {
             if (cliente.getCedula().equals(cedula)){
+                System.out.println("Ingrese el monto a insertar: ");
+                long monto = scanner.nextLong();
+                scanner.nextLine();
                 cliente.setAhorro(monto + cliente.getAhorro());
                 System.out.println("Monto agregado correctamente.\n Nuevo saldo: "+ cliente.getAhorro());
                 clienteEncontrado = true;
@@ -174,30 +174,45 @@ public class App {
     }
 
     //Metodo para pedir CDT
-    public static void pedirCDT(){
-        System.out.println("CDT's Digitales banco HOGAR SIN FAMILIA");
-        System.out.println("(1) -> CDT: CON HOGAR PERO SIN FAMILIA (3 MESES)\n(2) -> CDT: CON HOGAR Y CON FAMILIA (6 MESES)");
-        System.out.println("Digita el número del CDT para ver más información");
-        Scanner scanner = new Scanner(System.in);
-        byte opc = scanner.nextByte();
-        switch (opc) {
-            case 1:
-                System.out.println("\nCDT: CON HOGAR PERO SIN FAMILIA\nPLAZO: 3 Meses\nINTERÉS: 3% E.A");
-                System.out.println("SALDO ACTUAL:"); //Falta el método agregarDinero para continuar
-                System.out.println("SALDO DESPUÉS DEL CDT -> "); //Falta el método agregarDinero para continuar
-                System.out.println("¿Deseas este producto? Contacta a un asesor: 602 227 777\n\n");
-                break;
-            case 2:
-                System.out.println("\nCDT: CON HOGAR Y CON FAMILIA\nPLAZO: 6 Meses\nINTERÉS: 5% E.A");
-                System.out.println("SALDO ACTUAL:"); //Falta el método agregarDinero para continuar
-                System.out.println("SALDO DESPUÉS DEL CDT -> "); //Falta el método agregarDinero para continuar
-                System.out.println("¿Deseas este producto? Contacta a un asesor: 602 227 777\n\n");
-                break;
+        public static void pedirCDT(){
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Ingrese la cédula del cliente: ");
+            String cedula = scanner.nextLine();
+            boolean clienteEncontrado = false;
 
-            default: System.out.println("Digita una opción válida");
+        for(Cliente cliente : lista_clientes){
+            if(cliente.getCedula().equals(cedula)){
+                System.out.println("CDT's Digitales banco HOGAR SIN FAMILIA");
+                System.out.println("(1) -> CDT: CON HOGAR PERO SIN FAMILIA (3 MESES)\n(2) -> CDT: CON HOGAR Y CON FAMILIA (6 MESES)");
+                System.out.println("Digita el número del CDT para ver más información");
+                
+                byte opc = scanner.nextByte();
+            switch (opc) {
+                case 1:
+                    System.out.println("\nCDT: CON HOGAR PERO SIN FAMILIA\nPLAZO: 3 Meses\nINTERÉS: 3% E.A");
+                    System.out.println("SALDO ACTUAL: "+ cliente.getAhorro());
+                    double calculoCDT3 = cliente.getAhorro()*((0.03)*((double)90/365));
+                    System.out.println("SALDO DESPUÉS DEL CDT -> "+ Math.round(cliente.getAhorro() + calculoCDT3));
+                    System.out.println("DINERO GENERADO: "+Math.round(cliente.getAhorro()*((0.03)*((double)90/365))));
+                    break;
+                case 2:
+                    System.out.println("\nCDT: CON HOGAR Y CON FAMILIA\nPLAZO: 6 Meses\nINTERÉS: 5% E.A");
+                    System.out.println("SALDO ACTUAL:"+ cliente.getAhorro());
+                    double calculoCDT6 = cliente.getAhorro()*((0.05)*((double)180/365));
+                    System.out.println("SALDO DESPUÉS DEL CDT -> "+ Math.round(cliente.getAhorro() + calculoCDT6));
+                    System.out.println("DINERO GENERADO: "+Math.round(cliente.getAhorro()*((0.05)*((double)180/365))));
+                    break;
+                default: System.out.println("Digita una opción válida");
+                    break;
+            }
+                clienteEncontrado = true;
                 break;
+            }
         }
-    }
+        if (!clienteEncontrado) {
+            System.out.println("El cliente no existe :(");
+        }
+        }
 
     //Metodo submenú encargado de las operaciones con el dinero
     public static void submenu(){
