@@ -177,6 +177,7 @@ public class App {
         for(Cliente cliente : lista_clientes){
 
             if(cliente.getCedula().equals(cedula)){
+                System.out.println("Cantidad ahorrada: "+ cliente.getAhorro());
                 System.out.println("Ingrese la cantidad a pedir prestada (como maximo el doble de lo ahorrado)");
                 long prestamo = scanner.nextLong();
 
